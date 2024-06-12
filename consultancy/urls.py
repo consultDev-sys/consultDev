@@ -20,5 +20,5 @@ import quotation.urls as quotation_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/quotation', include(quotation_urls, namespace="quotation")),
+    path('api/v1/quotation/', include(quotation_urls, namespace="quotation")),
 ]
