@@ -29,18 +29,14 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['d7e5-2409-40d0-1021-956f-ac29-52ba-cc38-fe43.ngrok-free.app']
+ALLOWED_HOSTS = ['164.52.203.34']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://d7e5-2409-40d0-1021-956f-ac29-52ba-cc38-fe43.ngrok-free.app'
+    'http://164.52.203.34/'
 ]
 
-
-CORS_ALLOWED_ORIGINS = [
-    'https://d7e5-2409-40d0-1021-956f-ac29-52ba-cc38-fe43.ngrok-free.app',
-]
 
 
 # Application definition
