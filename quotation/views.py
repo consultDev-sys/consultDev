@@ -19,7 +19,7 @@ class QuotationView(APIView):
         quotation = Quotation.objects.filter(emirate_id=emirate_id, 
                                              freezone_id=freezone_id, 
                                              business_activity_id=business_activity_id, 
-                                             number_of_visa_packages=visa_package_id).last()
+                                             visa_packages=visa_package_id).last()
         
         serializer = QuotationSerialzer(quotation)
         return Response(serializer.data, status=status.HTTP_200_OK)
