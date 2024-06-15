@@ -29,8 +29,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['d7e5-2409-40d0-1021-956f-ac29-52ba-cc38-fe43.ngrok-free.app']
-CSRF_TRUSTED_ORIGINS =['https://d7e5-2409-40d0-1021-956f-ac29-52ba-cc38-fe43.ngrok-free.app']
+ALLOWED_HOSTS = ['*', 'd7e5-2409-40d0-1021-956f-ac29-52ba-cc38-fe43.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = [
+    'https://d7e5-24vddjbvkjdsvjsdlknvsklc09-40d0-1021-956f-ac29-52ba-cc38-fe43.ngrok-free.app'
+]
+CORS_ORIGIN_ALLOW_ALL = True   
 
 
 # Application definition
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'quotation',
 ]
@@ -56,6 +60,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
