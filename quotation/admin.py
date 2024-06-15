@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from quotation.forms import QuotationAdminForm
-from quotation.models import Emirate, Freezone, BusinessActivity, BusinessInFreezone, FreezoneInEmirates, Quotation
+from quotation.models import Emirate, Freezone, BusinessActivity, BusinessInFreezone, FreezoneInEmirates, Quotation, VisaPackage, VisaPackagesInBusiness
 from .forms import QuotationAdminForm
 
 class QuotationAdmin(admin.ModelAdmin):
@@ -14,6 +14,8 @@ class QuotationAdmin(admin.ModelAdmin):
 admin.site.register(Emirate)
 admin.site.register(Freezone)
 admin.site.register(BusinessActivity)
+admin.site.register(VisaPackage)
 admin.site.register(FreezoneInEmirates)
 admin.site.register(BusinessInFreezone)
 admin.site.register(Quotation)
+admin.site.register(VisaPackagesInBusiness)

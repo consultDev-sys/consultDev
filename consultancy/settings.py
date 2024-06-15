@@ -29,7 +29,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['d7e5-2409-40d0-1021-956f-ac29-52ba-cc38-fe43.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS =['https://d7e5-2409-40d0-1021-956f-ac29-52ba-cc38-fe43.ngrok-free.app']
 
 
 # Application definition
@@ -44,6 +45,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'quotation',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
