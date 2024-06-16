@@ -26,14 +26,14 @@ class CreatePdf():
         width, height = letter
         pdf.setFont("Helvetica", 12)
         line_height = 20
-        logo_path = "/home/consultant/consultDev/assets/random.svg"
+        # logo_path = "/home/consultant/consultDev/assets/random.svg"
         for page in range(1, 7):
             y = height - 40  # Start from the top of the page
 
             if page == 1:
                 # Add the logo on the top left of the first page
-                pdf.drawImage(logo_path, 30, height - 100, width=100, height=50)  # Adjust width and height as needed
-                y -= 80  # Adjust the starting position to avoid overlapping with the logo
+                # pdf.drawImage(logo_path, 30, height - 100, width=100, height=50)  # Adjust width and height as needed
+                # y -= 80  # Adjust the starting position to avoid overlapping with the logo
 
                 # Add a title and introductory paragraph on the first page
                 pdf.setFont("Helvetica-Bold", 16)
