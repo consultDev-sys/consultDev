@@ -3,7 +3,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.http import HttpResponse
 
+from quotation.api.v1.services.create_pdf import CreatePdf
 from quotation.models import BusinessInFreezone, Emirate, FreezoneInEmirates, Quotation, VisaPackagesInBusiness
 from quotation.serializers import BusinessInFreezoneSerializer, EmirateSerializer, FreezoneInEmiratesSerializer, QuotationSerialzer, VisaPackageSerializer
 # Create your views here.
@@ -21,8 +23,11 @@ class QuotationView(APIView):
                                              business_activity_id=business_activity_id, 
                                              visa_packages=visa_package_id).last()
         
-        serializer = QuotationSerialzer(quotation)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        quotation_data = QuotationSerialzer(quotation).data
+        pdf_file = CreatePdf().generate_pdf(quotation_data)
+        response = HttpResponse(pdf_file, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="business_license_report.pdf"'
+        return response
     
 
 class EmiratesView(APIView):

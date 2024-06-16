@@ -48,6 +48,22 @@ class VisaPackageSerializer(serializers.Serializer):
 
 
 class QuotationSerialzer(serializers.ModelSerializer):
+    emirate = serializers.SerializerMethodField()
+    freezone = serializers.SerializerMethodField()
+    business_activity = serializers.SerializerMethodField()
+    visa_packages = serializers.SerializerMethodField()
     class Meta:
         model = Quotation
         fields = '__all__'
+
+    def get_emirate(self, obj):
+        return obj.emirate.name
+    
+    def get_freezone(self, obj):
+        return obj.freezone.name
+    
+    def get_business_activity(self, obj):
+        return obj.business_activity.name
+    
+    def get_visa_packages(self, obj):
+        return obj.visa_packages.number_of_package
