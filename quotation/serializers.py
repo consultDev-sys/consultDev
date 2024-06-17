@@ -47,6 +47,13 @@ class VisaPackageSerializer(serializers.Serializer):
         return obj.visa_packages.number_of_package
 
 
+class QuotationGetSerialzer(serializers.Serializer):
+    emirate_id = serializers.IntegerField()
+    freezone_id = serializers.IntegerField()
+    business_activity_id = serializers.IntegerField()
+    visa_package_id = serializers.IntegerField()
+
+    
 class QuotationSerialzer(serializers.ModelSerializer):
     emirate = serializers.SerializerMethodField()
     freezone = serializers.SerializerMethodField()

@@ -8,22 +8,29 @@ from rest_framework.permissions import IsAuthenticated
 
 from quotation.api.v1.services.create_pdf import CreatePdf
 from quotation.models import BusinessInFreezone, Emirate, FreezoneInEmirates, Quotation, VisaPackagesInBusiness
-from quotation.serializers import BusinessInFreezoneSerializer, EmirateSerializer, FreezoneInEmiratesSerializer, QuotationSerialzer, VisaPackageSerializer
+from quotation.serializers import (BusinessInFreezoneSerializer, 
+                                   EmirateSerializer, 
+                                   FreezoneInEmiratesSerializer, 
+                                   QuotationGetSerialzer, 
+                                   QuotationSerialzer, 
+                                   VisaPackageSerializer
+                                   )
 # Create your views here.
 
 class QuotationView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        emirate_id = request.query_params.get('emirate_id')
-        freezone_id = request.query_params.get('freezone_id')
-        business_activity_id = request.query_params.get('business_activity_id')
-        visa_package_id = request.query_params.get('visa_package_id')
-
-        quotation = Quotation.objects.filter(emirate_id=emirate_id, 
-                                             freezone_id=freezone_id, 
-                                             business_activity_id=business_activity_id, 
-                                             visa_packages=visa_package_id).last()
+        query_params = request.query_params
+        serializer = QuotationGetSerialzer(data=query_params)
+        if not serializer.is_valid():
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        query_params = serializer.validated_data
+        quotation = Quotation.objects.filter(emirate_id=query_params["emirate_id"], 
+                                             freezone_id=query_params["freezone_id"], 
+                                             business_activity_id=query_params["business_activity_id"], 
+                                             visa_packages=query_params["visa_package_id"]).last()
         
         quotation_data = QuotationSerialzer(quotation).data
         pdf_file = CreatePdf().generate_pdf(quotation_data)
