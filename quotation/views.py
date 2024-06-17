@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.http import HttpResponse
+from rest_framework.permissions import IsAuthenticated
 
 from quotation.api.v1.services.create_pdf import CreatePdf
 from quotation.models import BusinessInFreezone, Emirate, FreezoneInEmirates, Quotation, VisaPackagesInBusiness
@@ -11,6 +12,7 @@ from quotation.serializers import BusinessInFreezoneSerializer, EmirateSerialize
 # Create your views here.
 
 class QuotationView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         emirate_id = request.query_params.get('emirate_id')
@@ -41,10 +43,12 @@ class EmiratesView(APIView):
     
 
 class FreezoneView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         emirate_id = self.kwargs['emirate_id']
         freezones = FreezoneInEmirates.objects.filter(emirate_id=emirate_id)
+
         serializer = FreezoneInEmiratesSerializer(freezones, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     

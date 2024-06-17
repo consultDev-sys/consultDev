@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import quotation.urls as quotation_urls
+import customer_auth.urls as auth_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/quotation/', include(quotation_urls, namespace="quotation")),
+    path('api/v1/auth/', include(auth_urls, namespace="auth")),
 ]
