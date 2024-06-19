@@ -18,7 +18,6 @@ from quotation.serializers import (BusinessInFreezoneSerializer,
 # Create your views here.
 
 class QuotationView(APIView):
-    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
@@ -50,7 +49,6 @@ class EmiratesView(APIView):
     
 
 class FreezoneView(APIView):
-    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         emirate_id = self.kwargs['emirate_id']
