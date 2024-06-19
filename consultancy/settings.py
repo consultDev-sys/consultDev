@@ -172,3 +172,10 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
+
+
+EMAIL_HOST = "smtp.ethereal.email"
+EMAIL_PORT = "587"
+EMAIL_HOST_USER = "jean99@ethereal.email"
+EMAIL_HOST_PASSWORD = "qA6wamewjbJZ7RDbgz"
+EMAIL_USE_TLS = True
