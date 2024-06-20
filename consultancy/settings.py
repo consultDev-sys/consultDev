@@ -176,6 +176,6 @@ SIMPLE_JWT = {
 
 EMAIL_HOST = "smtp.ethereal.email"
 EMAIL_PORT = "587"
-EMAIL_HOST_USER = "jean99@ethereal.email"
-EMAIL_HOST_PASSWORD = "qA6wamewjbJZ7RDbgz"
+EMAIL_HOST_USER = "elwin.hodkiewicz@ethereal.email"
+EMAIL_HOST_PASSWORD = "fq95hJUpEurYP5fzMC"
 EMAIL_USE_TLS = True
