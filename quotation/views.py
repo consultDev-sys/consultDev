@@ -44,13 +44,10 @@ class EmiratesView(APIView):
     def get(self, request, *args, **kwargs):
         emirates = Emirate.objects.all()
         serializer = EmirateSerializer(emirates, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK, headers={
-            'ngrok-skip-browser-warning': '1231'
-        })
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
 
 class FreezoneView(APIView):
-    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         emirate_id = self.kwargs['emirate_id']
