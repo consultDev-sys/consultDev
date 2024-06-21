@@ -174,8 +174,8 @@ SIMPLE_JWT = {
 }
 
 
-EMAIL_HOST = "smtp.ethereal.email"
+EMAIL_HOST = "smtp.mailgun.org"
 EMAIL_PORT = "587"
-EMAIL_HOST_USER = "elwin.hodkiewicz@ethereal.email"
-EMAIL_HOST_PASSWORD = "fq95hJUpEurYP5fzMC"
+EMAIL_HOST_USER = "postmaster@sandboxc2fab6a8628c4bf39e7888de74abbc68.mailgun.org"
+EMAIL_HOST_PASSWORD = "8778972e19c9f810832af84e869f02d3-6fafb9bf-8d2890be"
 EMAIL_USE_TLS = True
