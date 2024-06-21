@@ -174,8 +174,8 @@ SIMPLE_JWT = {
 }
 
 
-EMAIL_HOST = "smtp.mailgun.org"
-EMAIL_PORT = "587"
-EMAIL_HOST_USER = "postmaster@sandboxc2fab6a8628c4bf39e7888de74abbc68.mailgun.org"
-EMAIL_HOST_PASSWORD = "8778972e19c9f810832af84e869f02d3-6fafb9bf-8d2890be"
-EMAIL_USE_TLS = True
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
