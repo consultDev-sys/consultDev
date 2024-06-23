@@ -29,13 +29,14 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','164.52.203.34']
+ALLOWED_HOSTS = ['127.0.0.1','164.52.203.34', '164.52.203.34.nip.io']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1',
-    'http://164.52.203.34/'
+    'http://164.52.203.34/',
+    'https://164.52.203.34.nip.io/'
 ]
 
 AUTH_USER_MODEL = 'customer_auth.Customer'
