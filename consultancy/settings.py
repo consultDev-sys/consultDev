@@ -19,10 +19,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-print(f"EMAIL_HOST: {os.getenv('EMAIL_HOST')}")
-print(f"EMAIL_PORT: {os.getenv('EMAIL_PORT')}")
-print(f"EMAIL_HOST_USER: {os.getenv('EMAIL_HOST_USER')}")
-print(f"EMAIL_HOST_PASSWORD: {os.getenv('EMAIL_HOST_PASSWORD')}")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
