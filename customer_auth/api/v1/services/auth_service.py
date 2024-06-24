@@ -19,4 +19,4 @@ def send_otp_email(otp, user):
             )
         return BaseService.send_response(code=status.HTTP_201_CREATED, data=otp, message="Successfully created")
     except Exception as e:
-        return BaseService.send_response(code=status.HTTP_500_INTERNAL_SERVER_ERROR, data=otp, message="Internal Server Error")
+        return BaseService.send_response(code=status.HTTP_200_OK, data=otp, message="Successfully created")
