@@ -41,7 +41,7 @@ class RegisterUserView(APIView):
         user = get_user_model().objects.create(**user_data)
         user.save()
         response = send_otp_email(otp, user)
-        return Response(response, status=status.HTTP_201_CREATED)
+        return Response(response, status=response["code"])
     
 
 # Login View
