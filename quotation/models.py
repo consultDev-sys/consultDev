@@ -1,5 +1,7 @@
 from django.db import models
 
+from customer_auth.models import Customer
+
 class Emirate(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
@@ -97,3 +99,6 @@ class Quotation(models.Model):
         super().save(*args, **kwargs)
 
 
+class LogoImage(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    image = models.CharField(max_length=500)

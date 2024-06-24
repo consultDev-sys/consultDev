@@ -36,7 +36,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1',
     'http://164.52.203.34/',
-    'https://164.52.203.34.nip.io/'
+    'https://164.52.203.34.nip.io'
 ]
 
 AUTH_USER_MODEL = 'customer_auth.Customer'
@@ -181,7 +181,8 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 
-AWS_ACCESS_KEY_ID = 'your_access_key_id'
-AWS_SECRET_ACCESS_KEY = 'your_secret_access_key'
-AWS_STORAGE_BUCKET_NAME = 'your_bucket_name'
-AWS_S3_REGION_NAME = 'your_region_name'
+
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')

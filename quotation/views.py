@@ -86,16 +86,17 @@ class ImageUploadView(APIView):
     # permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        serializer = ImageUploadSerializer(data=request.data)
+        serializer = ImageUploadSerializer(data=request.FILES)
         if serializer.is_valid():
             image = serializer.validated_data['image']
-            customer_id = request.user.id
+            customer_id = 12
             
-            s3_service = S3Service()
-            image_url = s3_service.upload_image(image, customer_id)
-            
-            if image_url:
-                return Response({'image_url': image_url}, status=status.HTTP_201_CREATED)
-            else:
+            try:
+                s3_service = S3Service()
+                image_url = s3_service.upload_image(image, customer_id)
+                if image_url:
+                    s3_service.save_to_database(image_url, customer_id)
+                    return Response({'image_url': image_url}, status=status.HTTP_201_CREATED)
+            except Exception as e:
                 return Response({'error': 'Failed to upload image'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
