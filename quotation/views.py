@@ -6,11 +6,12 @@ from rest_framework.views import APIView
 from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticated
 
+from quotation.api.v1.services.bucket_service import S3Service
 from quotation.api.v1.services.create_pdf import CreatePdf
 from quotation.models import BusinessInFreezone, Emirate, FreezoneInEmirates, Quotation, VisaPackagesInBusiness
 from quotation.serializers import (BusinessInFreezoneSerializer, 
                                    EmirateSerializer, 
-                                   FreezoneInEmiratesSerializer, 
+                                   FreezoneInEmiratesSerializer, ImageUploadSerializer, 
                                    QuotationGetSerialzer, 
                                    QuotationSerialzer, 
                                    VisaPackageSerializer
@@ -79,3 +80,22 @@ class PackageView(APIView):
         visa_package_in_business = VisaPackagesInBusiness.objects.filter(business_in_freezone__in=business)
         serializer = VisaPackageSerializer(visa_package_in_business, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+class ImageUploadView(APIView):
+    # permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = ImageUploadSerializer(data=request.data)
+        if serializer.is_valid():
+            image = serializer.validated_data['image']
+            customer_id = request.user.id
+            
+            s3_service = S3Service()
+            image_url = s3_service.upload_image(image, customer_id)
+            
+            if image_url:
+                return Response({'image_url': image_url}, status=status.HTTP_201_CREATED)
+            else:
+                return Response({'error': 'Failed to upload image'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

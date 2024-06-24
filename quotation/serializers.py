@@ -74,3 +74,7 @@ class QuotationSerialzer(serializers.ModelSerializer):
     
     def get_visa_packages(self, obj):
         return obj.visa_packages.number_of_package
+
+
+class ImageUploadSerializer(serializers.Serializer):
+    image = serializers.ImageField()
