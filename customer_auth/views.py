@@ -48,7 +48,7 @@ class LoginUserView(APIView):
         
         data = serializer.validated_data
         response = login_user(request, data["email"], data["password"])
-        return Response(response, status=response["code"])
+        return Response(response, status=200)
 
 
 class LogoutView(APIView):
