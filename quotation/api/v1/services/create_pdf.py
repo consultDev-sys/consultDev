@@ -22,7 +22,7 @@ class CreatePdf():
             lines.append(line)
         return lines
 
-    def generate_pdf(self, customer, quotation, logo=None):
+    def generate_pdf(self, customer, quotation, logo=1):
         # Create a byte stream buffer
         buffer = io.BytesIO()
         # Create a canvas object using the buffer as the file-like object
@@ -66,7 +66,7 @@ class CreatePdf():
                 if logo:
                     try:
                         # Download the image from S3
-                        response = requests.get(logo)
+                        response = requests.get("https://emirateslaunchlogobucket.s3.amazonaws.com/1/Logotest.png")
                         img = ImageReader(BytesIO(response.content))
 
                         # Get the image dimensions
