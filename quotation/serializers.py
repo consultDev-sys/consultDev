@@ -52,7 +52,7 @@ class QuotationGetSerialzer(serializers.Serializer):
     freezone_id = serializers.IntegerField()
     business_activity_id = serializers.IntegerField()
     visa_package_id = serializers.IntegerField()
-    logo = serializers.CharField()
+    logo = serializers.CharField(required=False)
 
     
 class QuotationSerialzer(serializers.ModelSerializer):

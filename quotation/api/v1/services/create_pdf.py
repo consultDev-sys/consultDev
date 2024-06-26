@@ -22,7 +22,7 @@ class CreatePdf():
             lines.append(line)
         return lines
 
-    def generate_pdf(self, customer, quotation, logo):
+    def generate_pdf(self, customer, quotation, logo=None):
         # Create a byte stream buffer
         buffer = io.BytesIO()
         # Create a canvas object using the buffer as the file-like object

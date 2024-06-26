@@ -37,7 +37,7 @@ class QuotationView(APIView):
                                              visa_packages=query_params["visa_package_id"]).last()
         
         quotation_data = QuotationSerialzer(quotation).data
-        logo = query_params['logo']
+        logo = query_params.get('logo', None)
         pdf_file = CreatePdf().generate_pdf(customer, quotation_data, logo)
         response = HttpResponse(pdf_file, content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename="business_license_report.pdf"'
