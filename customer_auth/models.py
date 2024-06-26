@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
+
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -27,6 +29,7 @@ class Customer(AbstractBaseUser):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField(unique=True)
+    # country_code = models.CharField(max_length=100, default="91")
     phone_number = models.CharField(max_length=15, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

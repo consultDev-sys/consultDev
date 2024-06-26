@@ -22,9 +22,11 @@ class CustomUserSerializer(serializers.Serializer):
         if obj.get('password') != obj.get('confirm_password'):
             raise serializers.ValidationError("The passwords do not match")
         
-
-        
         return obj
+    
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
         
         
 

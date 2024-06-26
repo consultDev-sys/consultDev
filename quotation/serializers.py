@@ -52,11 +52,15 @@ class QuotationGetSerialzer(serializers.Serializer):
     freezone_id = serializers.IntegerField()
     business_activity_id = serializers.IntegerField()
     visa_package_id = serializers.IntegerField()
+    logo = serializers.CharField()
 
     
 class QuotationSerialzer(serializers.ModelSerializer):
     emirate = serializers.SerializerMethodField()
     freezone = serializers.SerializerMethodField()
+    freezone_description = serializers.SerializerMethodField()
+    allowed_packages = serializers.SerializerMethodField()
+    compliance_details = serializers.SerializerMethodField()
     business_activity = serializers.SerializerMethodField()
     visa_packages = serializers.SerializerMethodField()
     class Meta:
@@ -65,6 +69,15 @@ class QuotationSerialzer(serializers.ModelSerializer):
 
     def get_emirate(self, obj):
         return obj.emirate.name
+    
+    def get_freezone_description(self, obj):
+        return obj.freezone.description
+    
+    def get_allowed_packages(self, obj):
+        return obj.freezone.allowed_packages
+    
+    def get_compliance_details(self, obj):
+        return obj.freezone.compliance_details
     
     def get_freezone(self, obj):
         return obj.freezone.name

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
+    'phonenumber_field',
     'quotation',
     'customer_auth',
 ]
@@ -160,7 +161,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 from datetime import timedelta
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Example: 5 minutes
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),  # Example: 5 minutes
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),    # Example: 7 days
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,

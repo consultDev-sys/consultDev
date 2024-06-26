@@ -6,6 +6,8 @@ from rest_framework.views import APIView
 from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticated
 
+from consultancy.base_service import BaseService
+from customer_auth.helpers import get_error_string_from_serializer_error_object
 from quotation.api.v1.services.bucket_service import S3Service
 from quotation.api.v1.services.create_pdf import CreatePdf
 from quotation.models import BusinessInFreezone, Emirate, FreezoneInEmirates, Quotation, VisaPackagesInBusiness
@@ -23,6 +25,7 @@ class QuotationView(APIView):
 
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
+        customer = request.user
         serializer = QuotationGetSerialzer(data=query_params)
         if not serializer.is_valid():
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -34,7 +37,8 @@ class QuotationView(APIView):
                                              visa_packages=query_params["visa_package_id"]).last()
         
         quotation_data = QuotationSerialzer(quotation).data
-        pdf_file = CreatePdf().generate_pdf(quotation_data)
+        logo = query_params['logo']
+        pdf_file = CreatePdf().generate_pdf(customer, quotation_data, logo)
         response = HttpResponse(pdf_file, content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename="business_license_report.pdf"'
         return response
@@ -87,11 +91,14 @@ class ImageUploadView(APIView):
 
     def post(self, request):
         serializer = ImageUploadSerializer(data=request.FILES)
-        if serializer.is_valid():
-            image = serializer.validated_data['image']
-            customer_id = request.user.id
-            
-            s3_service = S3Service()
-            response = s3_service.upload_image(image, customer_id)
+        if not serializer.is_valid():
+            response = BaseService.send_response(errors=get_error_string_from_serializer_error_object(serializer.errors), 
+                                                code=status.HTTP_400_BAD_REQUEST,
+                                                message="Validation error")
             return Response(response, status=response["code"])
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+        image = serializer.validated_data['image']
+        customer_id = request.user.id
+        s3_service = S3Service()
+        response = s3_service.upload_image(image, customer_id)
+        return Response(response, status=response["code"])

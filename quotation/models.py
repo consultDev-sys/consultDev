@@ -11,6 +11,9 @@ class Emirate(models.Model):
 
 class Freezone(models.Model):
     name = models.CharField(max_length=100)
+    description = models.TextField(default="", blank=False)
+    allowed_packages = models.TextField(default="", blank=False)
+    compliance_details = models.TextField(default="", blank=False)
 
     def __str__(self):
         return f"{self.name}"
