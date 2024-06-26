@@ -70,8 +70,11 @@ def login_user(request, email, password):
         
     if user is not None:
         refresh = RefreshToken.for_user(user)
-        return BaseService.send_response(code=status.HTTP_200_OK, data={
+        # return BaseService.send_response(code=status.HTTP_200_OK, data={
+        #     'access': str(refresh.access_token)
+        # }, message="Login Successful")
+        return {
             'access': str(refresh.access_token)
-        }, message="Login Successful")
+        }
     else:
         return BaseService.send_response(code=status.HTTP_401_UNAUTHORIZED, errors='Invalid credentials', message="Invalid credentials")
